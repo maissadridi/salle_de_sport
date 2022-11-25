@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<br>
+<h2 style="color:#001A33;">liste des adhérents</h2>
+{% if SuppAdmin is defined %}
+    {{ SuppAdmin }}
+{% endif %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+    <li class="breadcrumb-item"><a href="#">Adhérents</a></li>
+</ol>
+<div class="form-group">
+    <input class="form-control" id="search" onkeyup="search(0)" placeholder="Rechercher par Cin" style="width:35%;float:right" type="text">
+</div>
+<br><br>
+<table class="table" id="myTable">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cin</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">email</th>
+            <th scope="col">proficient</th>
+            <th scope="col">date d'inscrit</th>
+            <th scope="col">Offre</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set i=0 %}
+        {% for user in users %}
+            {% if user.roles==['ROLE_USER'] %}
+            {% set i=i+1 %}
+            <tr>
+                <th scope="row">{{ i }}</th>
+                <td>{{ user.cin }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.proficient }}</td>
+                <td>{{ user.createdAt | date("d/m/Y") }}</td>
+                <td class="text-center">
+                    <a href="Success">
+                        <span class="badge badge-pill badge-success">Programmes</span>
+                    </a>
+                </td>
+                <td>    
+                <!-- 
+                            <script>
+                                
+                            </script>
+                            <a href="{{ path('suppUser', {id : user.id}) }}">
+                            <span class="badge badge-pill badge-danger">Supprimer</span>
+                            </a>
+                -->
+                        <a href="#" onClick="deleteClient('{{ path("suppUser", {id : user.id}) }}', '{{ user.name  }}', '{{ user.lastname }}')">
+                            <span class="badge badge-pill badge-danger">Supprimer</span>
+                        </a>
+                        <a href="{{ path('editUser', {id : user.id}) }}">
+                            <span class="badge badge-pill badge-warning">Editer</span>
+                        </a>
+                        <a href="{{ path('editUser', {id : user.id}) }}">
+                            <span class="badge badge-pill badge-info">Achat</span>
+                        </a>
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+<form action="{{ path('addUser') }}">
+    <button type="submit" class="btn btn-primary" style="float:right">Ajouter adhérents</button>
+</form>
+<br><br>
+<div id="equilibre"><br></div>
+
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Adhérents Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Supprimer <span class="npSpan"></span>.</p>
+      </div>
+      <div class="modal-footer">
+        <A href="#" class="btn btn-danger suppClient">Supprimer le client</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function deleteClient(lien, name, last){
+       $('.npSpan').text(name +" "+ last);
+       $('.suppClient').attr("href", lien);
+       $('.modal').modal('show');
+    }
+</script>
+{% endblock %}

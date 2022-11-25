@@ -3,17 +3,140 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
-
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+            <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% endblock %}
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href=""><img src="data:image/png;base64,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" hight="50px" width="50px">
+            <span style="color:#fff">Samurai</span></a>
+            <button aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor01" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href=""> Acceuil</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Contact</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/trainers">entraîneurs</a>
+                    </li>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li class="nav-item dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">{{app.user.name}}</a>
+                            <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: -120px; will-change: transform;" x-placement="bottom-start">
+                                <a class="dropdown-item" href="{{ path('admin') }}">gestion  des Adhérents</a>
+                                <a class="dropdown-item" href="{{ path('GestionTrainers') }}">gestion des entraîneurs</a>
+                                <a class="dropdown-item" href="{{ path('GestionProduct') }}">gestion des Produits</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">Déconexion</a>
+                            </div>
+                        </li>
+                    {% elseif is_granted("ROLE_USER") %}
+                        <li class="nav-item dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">{{app.user.name}}</a>
+                            <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: -120px; will-change: transform;" x-placement="bottom-start">
+                                <a class="dropdown-item" href="">Messages</a>
+                                <a class="dropdown-item" href="">Mes Formations</a>
+                                <a class="dropdown-item" href="">Formations</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">Déconexion</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link"  href="{{ path('app_login') }}" role="button">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+<div class="container mt-4">
+
         {% block body %}{% endblock %}
+</div>
+<footer class="footer-distributed">
+    <div class="footer-left">
+        <p class="footer-links">
+            <a href="../Application.php">Home</a>
+            ·
+            <a href="../contact.php">contact</a>
+            ·
+            <a href="#">About</a>
+        </p>
+        <p class="footer-company-name">ISI_FG&copy; 2022</p>
+    </div>
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p>
+                <a href="mailto:Cni@Cni.org<">contact@isi_r.com</a>
+            </p>
+        </div>
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+216 71 951 044</p>
+        </div>
+    </div>
+    <div class="footer-right">
+        <div class="footer-icons">
+            <a href="#">
+                <i class="fa fa-facebook"></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-linkedin"></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-github"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
+            <script src="{{ asset('js/popper.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
+            <!--  Notifications Plugin    -->
+            <script src="{{ asset('js/bootstrap-notify.js') }}"></script>
+        {% endblock %}
+
+        {% for message in app.flashes('success') %}
+            <script>
+                $.notify({
+                            icon: 'add_alert',
+                            message: '{{message}}'
+                            },
+                        {
+                            type: 'success'
+                        });
+            </script>
+        {% endfor %}
+        {% for message in app.flashes('danger') %}
+            <script>
+                $.notify({
+                            icon: 'add_alert',
+                            message: '{{message}}'
+                            },
+                        {
+                            type: 'danger'
+                        });
+            </script>
+        {% endfor %}
+
     </body>
 </html>

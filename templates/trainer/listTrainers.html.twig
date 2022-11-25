@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TrainerController!{% endblock %}
+
+{% block body %}
+    <h2 style="color:#001A33;">Liste de tous les entraîneur</h2>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Acceuil</a>
+        </li>
+        <li class="breadcrumb-item">entraîneur</li>
+    </ol>
+    <div class="row">
+        {% for trainer in trainers %}
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{asset('uploads/')}}{{ trainer.image }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ trainer.name }}</h5>
+                        <p class="card-text">{{ trainer.description }}.</p>
+                        <a href="#" class="btn btn-primary">Programmes</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

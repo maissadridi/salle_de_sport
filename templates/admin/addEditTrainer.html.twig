@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+{% form_theme formTrainer 'bootstrap_4_layout.html.twig' %}
+<h2 style="color:#001A33;">Ajouter Entraineur</h2>
+
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="/admin/trainers">Entreneurs</a></li>
+</ol>
+    {{ form_start(formTrainer, {'attr' : { 'enctype' : 'multipart/form-data'}}) }}
+        {{ form_row(formTrainer.name, {'attr' : {'placeholder' : 'Saisir le  Nom ...'}, 'label' : 'Nom'}) }}
+        {{ form_row(formTrainer.tel, {'attr' : {'placeholder' : 'Saisir le numero de télephone ...'}, 'label' : 'télephone'}) }}
+        {{ form_row(formTrainer.description, {'attr' : {'placeholder' : 'Saisir la description dentreneur ...'}, 'label' : 'Description'}) }}
+        <label for="formFileMultiple" class="form-label">Image</label>
+        <input class="form-control" placeholder="test" type="file" name="ImageTrainer[trainer]" />
+        <br>
+        <button class="btn btn-success" style="background-color: #2C3E50 " type="submit">Enregistrer</button>
+    {{ form_end(formTrainer) }}
+    <br>
+{% endblock %}

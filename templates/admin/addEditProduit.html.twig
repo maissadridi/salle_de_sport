@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+{% form_theme formProduct 'bootstrap_4_layout.html.twig' %}
+<h2 style="color:#001A33;">{{ action }}</h2>
+
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="/admin/trainers">Produit</a></li>
+</ol>
+    {{ form_start(formProduct, {'attr' : { 'enctype' : 'multipart/form-data'}}) }}
+        {{ form_row(formProduct.name, {'attr' : {'placeholder' : 'Saisir le  Nom  du produit ...'}, 'label' : 'Nom du produit'}) }}
+        {{ form_row(formProduct.price, {'attr' : {'placeholder' : 'Saisir le prix de produit ...'}, 'label' : 'Prix du produit'}) }}
+        <label for="formFileMultiple" class="form-label">Image</label>
+        <input class="form-control" placeholder="test" type="file" name="ImageProduit[produit]" />
+        <br>
+        <button class="btn btn-success" style="background-color: #2C3E50 " type="submit">Enregistrer</button>
+    {{ form_end(formProduct) }}
+    <br>
+{% endblock %}
